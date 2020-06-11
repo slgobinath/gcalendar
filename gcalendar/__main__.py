@@ -19,8 +19,8 @@
 import argparse
 import json
 import os
-import sys
 from datetime import datetime, timezone
+from os.path import join
 
 from dateutil.relativedelta import relativedelta
 from oauth2client import client
@@ -43,8 +43,7 @@ def validate_account_id(account_id):
     """
     account = str(account_id)
     if not account.isalnum():
-        raise argparse.ArgumentTypeError(
-            "%s is not an alphanumeric id" % account)
+        raise argparse.ArgumentError("%s is not an alphanumeric id" % account)
     return account
 
 
@@ -55,7 +54,14 @@ def error(message, current_time):
             current_time.date(), (current_time + relativedelta(days=1)).date()))
 
 
-def main(argv):
+def delete_if_exist(file_path):
+    try:
+        os.remove(file_path)
+    except OSError:
+        pass
+
+
+def main():
     """
     Retrieve Google Calendar events.
     """
@@ -69,15 +75,30 @@ def main(argv):
     parser.add_argument("--client-secret", type=str,
                         help="the Google client secret")
     parser.add_argument("--account", type=validate_account_id, default="default",
-                        help="a name to uniquely identify the account")
+                        help="an alphanumeric name to uniquely identify the account")
+    parser.add_argument("--reset", action="store_true",
+                        help="reset the the account")
     args = parser.parse_args()
+
+    account_id = args.account
+    storage_path = join(CONFIG_DIRECTORY, account_id + "_v1.dat")
+    if args.reset:
+        if os.path.exists(storage_path):
+            print("Resetting {0}...".format(account_id))
+            delete_if_exist(storage_path)
+            if os.path.exists(storage_path):
+                print("Failed to reset")
+            else:
+                print("Success!")
+        else:
+            print("Account '{0}' does not exist".format(account_id))
+        return 0
 
     # Extract arguments
     no_of_days = int(args.no_of_days)
     client_id = args.client_id
     client_secret = args.client_secret
     selected_calendars = [x.lower() for x in args.calendar]
-    account_id = args.account
 
     current_time = datetime.now(timezone.utc).astimezone()
     time_zone = str(current_time.tzinfo)
@@ -93,7 +114,7 @@ def main(argv):
         os.mkdir(CONFIG_DIRECTORY)
 
     try:
-        g_calendar = GCalendar(client_id, client_secret, account_id, CONFIG_DIRECTORY)
+        g_calendar = GCalendar(client_id, client_secret, account_id, storage_path)
         if args.list_calendars:
             for calendar in g_calendar.list_calendars():
                 print(calendar)
@@ -103,6 +124,7 @@ def main(argv):
                 print(json.dumps(calendar_events))
             else:
                 error("NO_EVENTS_FOUND_GOOGLE_CALENDAR", current_time)
+        return 0
 
     except clientsecrets.InvalidClientSecretsError:
         error("INVALID_CLIENT_SECRETS", current_time)
@@ -111,6 +133,8 @@ def main(argv):
     except BaseException:
         error("FAILED_TO_RETRIEVE_EVENTS", current_time)
 
+    return -1
+
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()

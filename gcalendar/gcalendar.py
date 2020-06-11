@@ -18,7 +18,6 @@
 
 import socket
 from datetime import datetime
-from os.path import join
 
 from googleapiclient import discovery
 from httplib2 import Http
@@ -30,12 +29,12 @@ from gcalendar import GOOGLE_CALENDAR_SCOPE, AUTH_URI, TOKEN_URI
 
 
 class GCalendar:
-    def __init__(self, client_id, client_secret, account_id, config_dir):
+    def __init__(self, client_id, client_secret, account_id, storage):
         super().__init__()
         self.client_id = client_id
         self.client_secret = client_secret
         self.account_id = account_id
-        self.storage = join(config_dir, account_id + "_v1.dat")
+        self.storage = storage
         self.service = self.create_service()
 
     def create_service(self):

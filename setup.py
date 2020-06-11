@@ -6,7 +6,8 @@ requires = [
     'python-dateutil',
     'google-api-python-client',
     'oauth2client',
-    'httplib2'
+    'httplib2',
+    'rsa<4.1,>=3.1.4'
 ]
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))

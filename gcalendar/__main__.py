@@ -26,7 +26,7 @@ from dateutil.relativedelta import relativedelta
 from oauth2client import client
 from oauth2client import clientsecrets
 
-from gcalendar import DEFAULT_CLIENT_ID, DEFAULT_CLIENT_SECRET, TOKEN_STORAGE_VERSION
+from gcalendar import DEFAULT_CLIENT_ID, DEFAULT_CLIENT_SECRET, TOKEN_STORAGE_VERSION, VERSION
 from gcalendar.gcalendar import GCalendar
 
 # the home folder
@@ -111,8 +111,7 @@ def main():
     """
     Retrieve Google Calendar events.
     """
-    parser = argparse.ArgumentParser(
-        description="Retrieve Google Calendar events.")
+    parser = argparse.ArgumentParser(prog='gcalendar', description="Read your Google Calendar events from terminal.")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--list-calendars", action="store_true")
     group.add_argument("--list-accounts", action="store_true")
@@ -128,6 +127,7 @@ def main():
     parser.add_argument("--client-id", type=str, help="the Google client id")
     parser.add_argument("--client-secret", type=str,
                         help="the Google client secret")
+    parser.add_argument('--version', action='version', version='%(prog)s ' + VERSION)
     args = parser.parse_args()
 
     # Create the config folder if not exists

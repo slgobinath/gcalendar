@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+TOKEN_STORAGE_VERSION = "v1"
+
 GOOGLE_CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 
 AUTH_URI = "https://accounts.google.com/o/oauth2/auth"

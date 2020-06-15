@@ -29,22 +29,28 @@ from gcalendar import GOOGLE_CALENDAR_SCOPE, AUTH_URI, TOKEN_URI
 
 
 class GCalendar:
-    def __init__(self, client_id, client_secret, account_id, storage):
+    def __init__(self, client_id, client_secret, account_id, storage_path):
         super().__init__()
         self.client_id = client_id
         self.client_secret = client_secret
         self.account_id = account_id
-        self.storage = storage
+        self.storage_path = storage_path
         self.service = self.create_service()
+
+    @staticmethod
+    def is_authorized(storage_path):
+        # Create a unique storage for the given account_id
+        storage = file.Storage(storage_path)
+        credentials = storage.get()
+
+        return not (credentials is None or credentials.invalid)
 
     def create_service(self):
         # Prepare credentials, and authorize HTTP object with them.
         # If the credentials don"t exist or are invalid run through the native client
         # flow. The Storage object will ensure that if successful the good
         # credentials will get written back to a file.
-
-        # Create a unique storage for the given account_id
-        storage = file.Storage(self.storage)
+        storage = file.Storage(self.storage_path)
         credentials = storage.get()
 
         # If credentials not found, authenticate

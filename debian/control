@@ -1,0 +1,20 @@
+Source: gcalendar
+Section: utils
+Priority: optional
+Maintainer: Gobinath Loganathan <slgobinath@gmail.com>
+Build-Depends: debhelper (>= 9), python3, python3-setuptools
+Standards-Version: 3.9.6
+X-Python3-Version: >= 3.4
+Homepage: https://github.com/slgobinath/gcalendar/
+
+Package: gcalendar
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3 (>= 3.4.0), python3-dateutil, python3-oauth2client, python3-googleapi
+Description: gcalendar
+ A command-line tool to read your Google Calendar events from terminal.
+ .
+ Features:
+  - List calendars
+  - List calendar events
+  - Multi-account support
+  - JSON and Plain Text formats

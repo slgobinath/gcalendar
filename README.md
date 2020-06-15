@@ -4,6 +4,26 @@ A command-line tool to read your Google Calendar events in JSON format.
 
 ## Installation
 
+### Ubuntu, Linux Mint and other Ubuntu Derivatives
+
+```shell script
+sudo add-apt-repository ppa:slgobinath/gcalendar
+sudo apt update
+sudo apt install gcalendar
+```
+
+### Other Distributions
+
+Install these dependencies:
+```shell script
+python3-pip python3-setuptools python3-dateutil python3-oauth2client python3-googleapi
+```
+
+Install `gcalendar`:
+```shell script
+pip3 install gcalendar
+````
+
 ### Install from Source
 ```shell script
 sudo apt install python3-pip python3-setuptools python3-dateutil python3-oauth2client python3-googleapi

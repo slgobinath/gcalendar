@@ -26,6 +26,12 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+/.pybuild/
+/debian/.debhelper
+/debian/files
+/debian/gcalendar.postinst.debhelper
+/debian/gcalendar.prerm.debhelper
+/debian/gcalendar.substvars
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

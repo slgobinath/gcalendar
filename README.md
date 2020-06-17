@@ -1,5 +1,8 @@
 # gcalendar
 
+[![PyPI version](https://badge.fury.io/py/gcalendar.svg)](https://badge.fury.io/py/gcalendar)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/slgobinath)
+
 A command-line tool to read your Google Calendar events in JSON format.
 
 ## Installation

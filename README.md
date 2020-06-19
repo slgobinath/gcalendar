@@ -15,6 +15,18 @@ sudo apt update
 sudo apt install gcalendar
 ```
 
+### Arch
+
+```shell script
+yay -S gcalendar
+```
+
+OR
+
+```shell script
+packer -S gcalendar
+```
+
 ### Other Distributions
 
 Install these dependencies:
@@ -29,7 +41,7 @@ pip3 install gcalendar
 
 ### Install from Source
 ```shell script
-sudo apt install python3-pip python3-setuptools python3-dateutil python3-oauth2client python3-googleapi
+sudo apt install python3-pip python3-setuptools python3-dateutil python3-oauth2client python3-googleapi git
 git clone https://github.com/slgobinath/gcalendar.git
 cd gcalendar
 pip3 install -e .
@@ -38,7 +50,7 @@ pip3 install -e .
 ## Run from Source
 
 ```shell script
-sudo apt install python3-pip python3-setuptools python3-dateutil python3-oauth2client python3-googleapi
+sudo apt install python3-pip python3-setuptools python3-dateutil python3-oauth2client python3-googleapi git
 git clone https://github.com/slgobinath/gcalendar.git
 cd gcalendar
 python3 -m gcalendar
@@ -73,6 +85,15 @@ optional arguments:
                         the Google client secret
   --version             show program's version number and exit
 ```
+
+## Authorization
+
+Run `gcalendar` from the terminal. It will open the Google Calendar OAthu screen in your default browser.
+Allow gcalendar to view your calendars as shown in this video: [gcalendar Authorization](https://www.youtube.com/watch?v=mwU8AQmzIPE).
+
+After successful authorization, `gcalendar` should print calendar events on your terminal.
+
+## Usage
 
 ### List Calendars
 
@@ -117,6 +138,10 @@ gcalendar --account foo --reset
 # reset the account named bar
 gcalendar --account bar --reset
 ```
+
+## Applications
+
+Cinnamon [Google Calendar](https://cinnamon-spices.linuxmint.com/desklets/view/35) desklet uses `gcalendar` to pull calendar events and show them on Cinnamon desktop.
 
 ## License
 

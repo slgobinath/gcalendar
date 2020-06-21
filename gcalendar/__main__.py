@@ -156,7 +156,7 @@ def main():
             else:
                 status = "Token Expired"
         else:
-            status = "Not authorized"
+            status = "Not authenticated"
         print_status(status, args.output)
         return 0
 

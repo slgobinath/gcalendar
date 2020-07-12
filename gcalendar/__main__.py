@@ -128,6 +128,7 @@ def main():
     parser.add_argument("--client-secret", type=str,
                         help="the Google client secret")
     parser.add_argument('--version', action='version', version='%(prog)s ' + VERSION)
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     # Create the config folder if not exists
@@ -189,8 +190,11 @@ def main():
             print_error("Invalid Client Secrets", args.output)
         except client.AccessTokenRefreshError:
             print_error("Failed to refresh access token", args.output)
-        except BaseException:
+        except BaseException as ex:
             print_error("Failed to connect Google Calendar", args.output)
+            if args.debug:
+                # Raise the exception in debug mode
+                raise ex
 
         return -1
 

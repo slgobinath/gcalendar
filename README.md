@@ -59,12 +59,10 @@ python3 -m gcalendar
 ## Help
 
 ```shell script
-usage: gcalendar [-h]
-                 [--list-calendars | --list-accounts | --status | --reset]
-                 [--calendar [CALENDAR [CALENDAR ...]]]
-                 [--no-of-days NO_OF_DAYS] [--account ACCOUNT]
-                 [--output {txt,json}] [--client-id CLIENT_ID]
-                 [--client-secret CLIENT_SECRET] [--version]
+usage: gcalendar [-h] [--list-calendars | --list-accounts | --status | --reset]
+                 [--calendar [CALENDAR [CALENDAR ...]]] [--no-of-days NO_OF_DAYS] [--account ACCOUNT]
+                 [--output {txt,json}] [--client-id CLIENT_ID] [--client-secret CLIENT_SECRET] [--version]
+                 [--debug]
 
 Read your Google Calendar events from terminal.
 
@@ -84,6 +82,7 @@ optional arguments:
   --client-secret CLIENT_SECRET
                         the Google client secret
   --version             show program's version number and exit
+  --debug
 ```
 
 ## Authorization

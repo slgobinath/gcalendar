@@ -17,8 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import socket
-from datetime import datetime
 
+from dateutil import parser
 from googleapiclient import discovery
 from httplib2 import Http
 from oauth2client import client
@@ -109,10 +109,8 @@ class GCalendar:
                 calendar_event = {"calendar_color": calendar_color, "summary": event.get("summary", "NO_TITLE")}
                 # Extract the start and end time
                 if "dateTime" in event["start"]:
-                    start_date_time = datetime.strptime(
-                        "".join(event["start"]["dateTime"].rsplit(":", 1)), "%Y-%m-%dT%H:%M:%S%z")
-                    end_date_time = datetime.strptime(
-                        "".join(event["end"]["dateTime"].rsplit(":", 1)), "%Y-%m-%dT%H:%M:%S%z")
+                    start_date_time = parser.isoparse(event["start"]["dateTime"])
+                    end_date_time = parser.isoparse(event["end"]["dateTime"])
                     calendar_event["start_date"] = str(start_date_time.date())
                     calendar_event["start_time"] = str(start_date_time.time()).rsplit(":", 1)[0]
                     calendar_event["end_date"] = str(end_date_time.date())

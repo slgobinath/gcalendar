@@ -29,14 +29,14 @@ def __package_files(directory):
 
 setuptools.setup(
     name="gcalendar",
-    version="0.2",
+    version="0.3",
     description="Read Google Calendar events from your terminal.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/gcalendar",
-    download_url="https://github.com/slgobinath/gcalendar/archive/v0.2.tar.gz",
+    download_url="https://github.com/slgobinath/gcalendar/archive/v0.3.tar.gz",
     packages=setuptools.find_packages(),
     package_data={},
     install_requires=requires,

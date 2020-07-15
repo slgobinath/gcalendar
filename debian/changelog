@@ -1,4 +1,5 @@
-gcalendar (0.2-3) focal; urgency=high
+gcalendar (0.3-1) focal; urgency=high
+  * Bug fix in reading different timezone
   * Initial release
 
  -- Gobinath Loganathan <slgobinath@gmail.com>  Sat, 15 Oct 2016 06:28:40 +0530

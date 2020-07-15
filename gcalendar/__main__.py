@@ -45,7 +45,7 @@ def validate_account_id(account_id):
     """
     account = str(account_id)
     if not account.isalnum():
-        raise argparse.ArgumentError("%s is not an alphanumeric id" % account)
+        raise argparse.ArgumentError("--account", "%s is not an alphanumeric id" % account)
     return account
 
 
@@ -113,22 +113,20 @@ def main():
     """
     parser = argparse.ArgumentParser(prog='gcalendar', description="Read your Google Calendar events from terminal.")
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("--list-calendars", action="store_true")
-    group.add_argument("--list-accounts", action="store_true")
-    group.add_argument("--status", action="store_true")
-    group.add_argument("--reset", action="store_true",
-                       help="reset the the account")
-    parser.add_argument("--calendar", type=str, default=["*"], nargs="*")
-    parser.add_argument("--no-of-days", type=str, default="7",
-                        help="number of days to include")
+    group.add_argument("--list-calendars", action="store_true", help="list all calendars from the Google account")
+    group.add_argument("--list-accounts", action="store_true", help="list the id of gcalendar accounts")
+    group.add_argument("--status", action="store_true", help="print the status of the gcalendar account")
+    group.add_argument("--reset", action="store_true", help="reset the the account")
+    parser.add_argument("--calendar", type=str, default=["*"], nargs="*", help="calendars to list events from")
+    parser.add_argument("--no-of-days", type=str, default="7", help="number of days to include")
     parser.add_argument("--account", type=validate_account_id, default="default",
                         help="an alphanumeric name to uniquely identify the account")
-    parser.add_argument("--output", choices=["txt", "json"], default="txt")
+    parser.add_argument("--output", choices=["txt", "json"], default="txt", help="output format")
     parser.add_argument("--client-id", type=str, help="the Google client id")
     parser.add_argument("--client-secret", type=str,
                         help="the Google client secret")
     parser.add_argument('--version', action='version', version='%(prog)s ' + VERSION)
-    parser.add_argument("--debug", action="store_true")
+    parser.add_argument("--debug", action="store_true", help="run gcalendar in debug mode")
     args = parser.parse_args()
 
     # Create the config folder if not exists
@@ -169,7 +167,7 @@ def main():
         selected_calendars = [x.lower() for x in args.calendar]
 
         current_time = datetime.now(timezone.utc).astimezone()
-        time_zone = str(current_time.tzinfo)
+        time_zone = current_time.tzinfo
         start_time = str(current_time.isoformat())
         end_time = str((current_time + relativedelta(days=no_of_days)).isoformat())
 

@@ -98,19 +98,20 @@ class GCalendar:
     def retrieve_events(self, calendar_id, calendar_color, start_time, end_time, time_zone):
         page_token = None
         retrieved_events = []
+        time_zone_str = str(time_zone)
         while True:
             events = self.service.events().list(calendarId=calendar_id,
                                                 pageToken=page_token,
                                                 timeMin=start_time,
                                                 timeMax=end_time,
-                                                timeZone=time_zone,
+                                                timeZone=time_zone_str,
                                                 singleEvents=True).execute()
             for event in events["items"]:
                 calendar_event = {"calendar_color": calendar_color, "summary": event.get("summary", "NO_TITLE")}
                 # Extract the start and end time
                 if "dateTime" in event["start"]:
-                    start_date_time = parser.isoparse(event["start"]["dateTime"])
-                    end_date_time = parser.isoparse(event["end"]["dateTime"])
+                    start_date_time = parser.isoparse(event["start"]["dateTime"]).astimezone(time_zone)
+                    end_date_time = parser.isoparse(event["end"]["dateTime"]).astimezone(time_zone)
                     calendar_event["start_date"] = str(start_date_time.date())
                     calendar_event["start_time"] = str(start_date_time.time()).rsplit(":", 1)[0]
                     calendar_event["end_date"] = str(end_date_time.date())

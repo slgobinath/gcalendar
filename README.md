@@ -59,30 +59,29 @@ python3 -m gcalendar
 ## Help
 
 ```shell script
-usage: gcalendar [-h] [--list-calendars | --list-accounts | --status | --reset]
-                 [--calendar [CALENDAR [CALENDAR ...]]] [--no-of-days NO_OF_DAYS] [--account ACCOUNT]
-                 [--output {txt,json}] [--client-id CLIENT_ID] [--client-secret CLIENT_SECRET] [--version]
-                 [--debug]
+usage: gcalendar [-h] [--list-calendars | --list-accounts | --status | --reset] [--calendar [CALENDAR [CALENDAR ...]]] [--no-of-days NO_OF_DAYS] [--account ACCOUNT]
+                 [--output {txt,json}] [--client-id CLIENT_ID] [--client-secret CLIENT_SECRET] [--version] [--debug]
 
 Read your Google Calendar events from terminal.
 
 optional arguments:
   -h, --help            show this help message and exit
-  --list-calendars
-  --list-accounts
-  --status
+  --list-calendars      list all calendars from the Google account
+  --list-accounts       list the id of gcalendar accounts
+  --status              print the status of the gcalendar account
   --reset               reset the the account
   --calendar [CALENDAR [CALENDAR ...]]
+                        calendars to list events from
   --no-of-days NO_OF_DAYS
                         number of days to include
   --account ACCOUNT     an alphanumeric name to uniquely identify the account
-  --output {txt,json}
+  --output {txt,json}   output format
   --client-id CLIENT_ID
                         the Google client id
   --client-secret CLIENT_SECRET
                         the Google client secret
   --version             show program's version number and exit
-  --debug
+  --debug               run gcalendar in debug mode
 ```
 
 ## Authorization

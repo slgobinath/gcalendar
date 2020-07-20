@@ -23,6 +23,8 @@ from datetime import datetime, timezone
 from os.path import join
 
 from dateutil.relativedelta import relativedelta
+from googleapiclient.errors import HttpError
+from httplib2 import HttpLib2Error
 from oauth2client import client
 from oauth2client import clientsecrets
 
@@ -75,11 +77,13 @@ def reset_account(account_id, storage_path):
         return "Account %s does not exist" % account_id
 
 
-def print_error(message, output_type):
+def handle_error(error, message, output_type, debug_mode):
     if output_type == "txt":
         print("\033[91m" + message + "\033[0m")
     elif output_type == "json":
         print('{"error": "%s"}' % message)
+    if debug_mode:
+        raise error
 
 
 def print_status(status, output_type):
@@ -184,15 +188,29 @@ def main():
                 print_events(calendar_events, args.output)
             return 0
 
-        except clientsecrets.InvalidClientSecretsError:
-            print_error("Invalid Client Secrets", args.output)
-        except client.AccessTokenRefreshError:
-            print_error("Failed to refresh access token", args.output)
+        except clientsecrets.InvalidClientSecretsError as ex:
+            handle_error(ex, "Invalid Client Secrets", args.output, args.debug)
+
+        except client.AccessTokenRefreshError as ex:
+            handle_error(ex, "Failed to refresh access token", args.output, args.debug)
+
+        except HttpLib2Error as ex:
+            if "Unable to find the server at" in str(ex):
+                msg = "Unable to find the Google Calendar server. Please check your connection."
+            else:
+                msg = "Failed to connect Google Calendar"
+            handle_error(ex, msg, args.output, args.debug)
+
+        except HttpError as ex:
+            if "Too Many Requests" in str(ex):
+                msg = "You have reached your request quota limit. Please try gcalendar after a few minutes."
+            else:
+                msg = "Failed to connect Google Calendar"
+
+            handle_error(ex, msg, args.output, args.debug)
+
         except BaseException as ex:
-            print_error("Failed to connect Google Calendar", args.output)
-            if args.debug:
-                # Raise the exception in debug mode
-                raise ex
+            handle_error(ex, "Failed to connect Google Calendar", args.output, args.debug)
 
         return -1
 

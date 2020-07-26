@@ -58,7 +58,7 @@ python3 -m gcalendar
 
 ## Help
 
-```shell script
+```text
 usage: gcalendar [-h] [--list-calendars | --list-accounts | --status | --reset] [--calendar [CALENDAR [CALENDAR ...]]] [--no-of-days NO_OF_DAYS] [--account ACCOUNT]
                  [--output {txt,json}] [--client-id CLIENT_ID] [--client-secret CLIENT_SECRET] [--version] [--debug]
 
@@ -136,6 +136,10 @@ gcalendar --account foo --reset
 # reset the account named bar
 gcalendar --account bar --reset
 ```
+
+## Issues
+
+Run `gcalendar --debug` and create an [issue](https://github.com/slgobinath/gcalendar/issues) with the output.
 
 ## Applications
 

@@ -48,5 +48,5 @@ setuptools.setup(
                     "Environment :: X11 Applications :: GTK",
                     "Intended Audience :: End Users/Desktop",
                     "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in
-                                             '3 3.4 3.5 3.6 3.7'.split()]
+                                             '3 3.4 3.5 3.6 3.7 3.8 3.9'.split()]
 )

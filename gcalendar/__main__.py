@@ -120,7 +120,7 @@ def main():
     group.add_argument("--list-calendars", action="store_true", help="list all calendars from the Google account")
     group.add_argument("--list-accounts", action="store_true", help="list the id of gcalendar accounts")
     group.add_argument("--status", action="store_true", help="print the status of the gcalendar account")
-    group.add_argument("--reset", action="store_true", help="reset the the account")
+    group.add_argument("--reset", action="store_true", help="reset the account")
     parser.add_argument("--calendar", type=str, default=["*"], nargs="*", help="calendars to list events from")
     parser.add_argument("--no-of-days", type=str, default="7", help="number of days to include")
     parser.add_argument("--account", type=validate_account_id, default="default",

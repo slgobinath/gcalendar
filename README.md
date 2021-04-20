@@ -69,7 +69,7 @@ optional arguments:
   --list-calendars      list all calendars from the Google account
   --list-accounts       list the id of gcalendar accounts
   --status              print the status of the gcalendar account
-  --reset               reset the the account
+  --reset               reset the account
   --calendar [CALENDAR [CALENDAR ...]]
                         calendars to list events from
   --no-of-days NO_OF_DAYS

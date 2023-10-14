@@ -116,7 +116,7 @@ def print_events(events, output_type):
         for event in events:
             print("%s:%s - %s:%s\t%s\t%s\t%s" % (
                 event["start_date"], event["start_time"], event["end_date"], event["end_time"], event["summary"],
-                event["location"], event["description"]))
+                event["location"], event["status"]))
     elif output_type == "json":
         print(json.dumps(events))
 

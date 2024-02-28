@@ -86,7 +86,7 @@ optional arguments:
 
 ## Authorization
 
-Run `gcalendar` from the terminal. It will open the Google Calendar OAthu screen in your default browser.
+Run `gcalendar` from the terminal. It will open the Google Calendar OAuth screen in your default browser.
 Allow gcalendar to view your calendars as shown in this video: [gcalendar Authorization](https://www.youtube.com/watch?v=mwU8AQmzIPE).
 
 After successful authorization, `gcalendar` should print calendar events on your terminal.

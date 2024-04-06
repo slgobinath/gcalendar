@@ -107,6 +107,7 @@ class GCalendar:
                                                 timeZone=time_zone_str,
                                                 singleEvents=True).execute()
             for event in events["items"]:
+            
                 calendar_event = {"calendar_color": calendar_color, "summary": event.get("summary", "NO_TITLE")}
                 # Extract the start and end time
                 if "dateTime" in event["start"]:
@@ -127,6 +128,27 @@ class GCalendar:
                     calendar_event["location"] = event["location"]
                 else:
                     calendar_event["location"] = ""
+                    
+                if "description" in event:
+                    calendar_event["description"] = event["description"]
+                else:
+                    calendar_event["description"] = ""
+                    
+                if "organizer" in event:
+                    calendar_event["organizer"] = event["organizer"]
+                else:
+                    calendar_event["organizer"] = ""
+                    
+                if "attendees" in event:
+                    calendar_event["attendees"] = event["attendees"]
+                else:
+                    calendar_event["attendees"] = ""
+
+                if "status" in event:
+                    calendar_event["status"] = event["status"]
+                else: 
+                    calendar_event["status"] = ""
+                    
                 retrieved_events.append(calendar_event)
             page_token = events.get("nextPageToken")
             if not page_token:
